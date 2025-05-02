@@ -1,2 +1,0 @@
-
-Travel to the destinations.
