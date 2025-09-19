@@ -1,20 +1,6 @@
-import React, { createContext, useState, useContext, ReactNode } from 'react';
+import React, { createContext, useState, useContext } from 'react';
 
-type User = {
-  id: string;
-  name: string;
-  email: string;
-} | null;
-
-interface AuthContextType {
-  user: User;
-  login: (email: string, password: string) => Promise<boolean>;
-  signup: (name: string, email: string, password: string) => Promise<boolean>;
-  logout: () => void;
-  isAuthenticated: boolean;
-}
-
-const AuthContext = createContext<AuthContextType | undefined>(undefined);
+const AuthContext = createContext(undefined);
 
 export const useAuth = () => {
   const context = useContext(AuthContext);
@@ -24,15 +10,11 @@ export const useAuth = () => {
   return context;
 };
 
-interface AuthProviderProps {
-  children: ReactNode;
-}
-
-const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-  const [user, setUser] = useState<User>(null);
+const AuthProvider = ({ children }) => {
+  const [user, setUser] = useState(null);
 
   // Mock authentication functions
-  const login = async (email: string, password: string): Promise<boolean> => {
+  const login = async (email, password) => {
     // Simulate API call
     await new Promise(resolve => setTimeout(resolve, 800));
     
@@ -48,7 +30,7 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     return false;
   };
 
-  const signup = async (name: string, email: string, password: string): Promise<boolean> => {
+  const signup = async (name, email, password) => {
     // Simulate API call
     await new Promise(resolve => setTimeout(resolve, 800));
     

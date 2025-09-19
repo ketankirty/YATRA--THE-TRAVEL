@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
-import { Calendar, MapPin, Compass, Search, Users } from 'lucide-react';
+import { Calendar, MapPin, Search, Users } from 'lucide-react';
 
-const BookingForm: React.FC = () => {
+const BookingForm = () => {
   const [destination, setDestination] = useState('');
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [guests, setGuests] = useState(1);
   const [budget, setBudget] = useState('any');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     console.log({
       destination,

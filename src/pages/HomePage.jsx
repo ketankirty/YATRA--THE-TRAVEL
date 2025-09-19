@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, MapPin, Calendar, Search, Image } from 'lucide-react';
+import { ArrowRight, MapPin, Calendar, Image } from 'lucide-react';
 import BookingForm from '../components/home/BookingForm';
 import FeaturedDestinations from '../components/home/FeaturedDestinations';
 import Testimonials from '../components/home/Testimonials';
 
-const HomePage: React.FC = () => {
+const HomePage = () => {
   return (
     <div>
       {/* Hero Section */}

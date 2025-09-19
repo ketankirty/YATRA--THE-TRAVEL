@@ -1,13 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { MapPin, Star, Users, Calendar } from 'lucide-react';
-import { Destination } from '../../data/destinations';
 
-interface DestinationCardProps {
-  destination: Destination;
-}
-
-const DestinationCard: React.FC<DestinationCardProps> = ({ destination }) => {
+const DestinationCard = ({ destination }) => {
   return (
     <div className="card hover-lift">
       <div className="relative h-52 overflow-hidden">

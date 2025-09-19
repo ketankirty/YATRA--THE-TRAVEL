@@ -1,16 +1,7 @@
 import React, { useState } from 'react';
 import { ChevronLeft, ChevronRight, Star } from 'lucide-react';
 
-interface Testimonial {
-  id: number;
-  name: string;
-  location: string;
-  avatar: string;
-  rating: number;
-  text: string;
-}
-
-const testimonials: Testimonial[] = [
+const testimonials = [
   {
     id: 1,
     name: 'Priya Sharma',
@@ -45,9 +36,9 @@ const testimonials: Testimonial[] = [
   }
 ];
 
-const Testimonials: React.FC = () => {
+const Testimonials = () => {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [direction, setDirection] = useState<'left' | 'right' | null>(null);
+  const [direction, setDirection] = useState(null);
 
   const nextTestimonial = () => {
     setDirection('right');

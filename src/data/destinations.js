@@ -1,20 +1,4 @@
-export interface Destination {
-  id: string;
-  name: string;
-  region: string;
-  description: string;
-  image: string;
-  price: number;
-  duration: string;
-  rating: number;
-  type: string;
-  featured: boolean;
-  group: boolean;
-  groupSize?: number;
-  discount: number;
-}
-
-export const destinationData: Destination[] = [
+export const destinationData = [
   {
     id: 'kerala-backwaters',
     name: 'Kerala Backwaters',

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { MapPin, Star } from 'lucide-react';
 import { destinationData } from '../../data/destinations';
 
-const FeaturedDestinations: React.FC = () => {
+const FeaturedDestinations = () => {
   // Get only the featured destinations (first 6)
   const featuredDestinations = destinationData.slice(0, 6);
 

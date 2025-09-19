@@ -4,11 +4,11 @@ import { Menu, X, ChevronDown, User, LogIn, LogOut } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import AuthModal from '../auth/AuthModal';
 
-const Navbar: React.FC = () => {
+const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [showAuthModal, setShowAuthModal] = useState(false);
-  const [authMode, setAuthMode] = useState<'login' | 'signup'>('login');
+  const [authMode, setAuthMode] = useState('login');
   const [showProfileMenu, setShowProfileMenu] = useState(false);
   const { isAuthenticated, user, logout } = useAuth();
   const location = useLocation();
@@ -28,7 +28,7 @@ const Navbar: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const openAuthModal = (mode: 'login' | 'signup') => {
+  const openAuthModal = (mode) => {
     setAuthMode(mode);
     setShowAuthModal(true);
   };

@@ -3,14 +3,8 @@ import { X } from 'lucide-react';
 import LoginForm from './LoginForm';
 import SignupForm from './SignupForm';
 
-interface AuthModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  initialMode: 'login' | 'signup';
-}
-
-const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialMode }) => {
-  const [mode, setMode] = useState<'login' | 'signup'>(initialMode);
+const AuthModal = ({ isOpen, onClose, initialMode }) => {
+  const [mode, setMode] = useState(initialMode);
 
   if (!isOpen) return null;
 

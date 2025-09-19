@@ -1,29 +1,22 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { MessageSquare, Send, X, Minimize2, Maximize2 } from 'lucide-react';
 
-interface Message {
-  id: string;
-  type: 'user' | 'bot';
-  text: string;
-  timestamp: Date;
-}
-
-const initialMessage: Message = {
+const initialMessage = {
   id: '1',
   type: 'bot',
   text: 'Hi! I\'m Yatra Assistant. How can I help you plan your perfect Indian adventure today?',
   timestamp: new Date()
 };
 
-const ChatBot: React.FC = () => {
+const ChatBot = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
-  const [messages, setMessages] = useState<Message[]>([initialMessage]);
+  const [messages, setMessages] = useState([initialMessage]);
   const [inputText, setInputText] = useState('');
   const [isTyping, setIsTyping] = useState(false);
   
-  const messagesEndRef = useRef<HTMLDivElement>(null);
-  const inputRef = useRef<HTMLTextAreaElement>(null);
+  const messagesEndRef = useRef(null);
+  const inputRef = useRef(null);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -33,13 +26,13 @@ const ChatBot: React.FC = () => {
     scrollToBottom();
   }, [messages]);
 
-  const generateResponse = async (userMessage: string): Promise<string> => {
+  const generateResponse = async (userMessage) => {
     // Simulate AI response based on user input
     setIsTyping(true);
     await new Promise(resolve => setTimeout(resolve, 1000));
     setIsTyping(false);
 
-    const responses: { [key: string]: string } = {
+    const responses = {
       default: "I'd be happy to help you plan your trip to India. What specific information are you looking for?",
       destination: "We offer tours to many beautiful destinations across India including Kerala, Rajasthan, Goa, and the Himalayas. Would you like to know more about any specific destination?",
       booking: "To book a tour, you can use our booking form at the top of the homepage. Would you like me to guide you through the process?",
@@ -55,11 +48,11 @@ const ChatBot: React.FC = () => {
     return responses.default;
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!inputText.trim()) return;
 
-    const userMessage: Message = {
+    const userMessage = {
       id: Date.now().toString(),
       type: 'user',
       text: inputText,
@@ -70,7 +63,7 @@ const ChatBot: React.FC = () => {
     setInputText('');
 
     const response = await generateResponse(inputText);
-    const botMessage: Message = {
+    const botMessage = {
       id: (Date.now() + 1).toString(),
       type: 'bot',
       text: response,
@@ -80,7 +73,7 @@ const ChatBot: React.FC = () => {
     setMessages(prev => [...prev, botMessage]);
   };
 
-  const handleKeyPress = (e: React.KeyboardEvent) => {
+  const handleKeyPress = (e) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
       handleSubmit(e);

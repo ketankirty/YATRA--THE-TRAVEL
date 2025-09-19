@@ -4,25 +4,15 @@ import { Search, Filter, MapPin, X, Star } from 'lucide-react';
 import { destinationData } from '../data/destinations';
 import DestinationCard from '../components/destinations/DestinationCard';
 
-interface FilterState {
-  region: string;
-  minPrice: number;
-  maxPrice: number;
-  rating: number;
-  duration: string;
-  type: string;
-}
-
-const DestinationsPage: React.FC = () => {
+const DestinationsPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const searchParams = new URLSearchParams(location.search);
   
   const [searchTerm, setSearchTerm] = useState(searchParams.get('search') || '');
   const [filteredDestinations, setFilteredDestinations] = useState(destinationData);
-  const [showFilters, setShowFilters] = useState(false);
   
-  const [filters, setFilters] = useState<FilterState>({
+  const [filters, setFilters] = useState({
     region: searchParams.get('region') || '',
     minPrice: Number(searchParams.get('minPrice')) || 0,
     maxPrice: Number(searchParams.get('maxPrice')) || 100000,
@@ -78,12 +68,12 @@ const DestinationsPage: React.FC = () => {
     navigate({ search: params.toString() }, { replace: true });
   }, [searchTerm, filters, navigate]);
 
-  const handleSearch = (e: React.FormEvent) => {
+  const handleSearch = (e) => {
     e.preventDefault();
     // The filtering is already handled by the useEffect
   };
 
-  const handleFilterChange = (name: keyof FilterState, value: string | number) => {
+  const handleFilterChange = (name, value) => {
     setFilters(prev => ({
       ...prev,
       [name]: value

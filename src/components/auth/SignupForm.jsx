@@ -2,11 +2,7 @@ import React, { useState } from 'react';
 import { User, Mail, Lock, Loader } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 
-interface SignupFormProps {
-  onClose: () => void;
-}
-
-const SignupForm: React.FC<SignupFormProps> = ({ onClose }) => {
+const SignupForm = ({ onClose }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -15,7 +11,7 @@ const SignupForm: React.FC<SignupFormProps> = ({ onClose }) => {
   
   const { signup } = useAuth();
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
     setLoading(true);

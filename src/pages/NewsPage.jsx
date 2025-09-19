@@ -1,19 +1,7 @@
 import React, { useState } from 'react';
 import { Search, Calendar, User, ArrowRight, Tag } from 'lucide-react';
 
-interface BlogPost {
-  id: string;
-  title: string;
-  excerpt: string;
-  content: string;
-  image: string;
-  author: string;
-  date: string;
-  category: string;
-  tags: string[];
-}
-
-const blogPosts: BlogPost[] = [
+const blogPosts = [
   {
     id: '1',
     title: 'Top 10 Hidden Beaches in Goa That Tourists Don\'t Know About',
@@ -97,10 +85,10 @@ const allTags = [
   'Events', 'Rajasthan', 'Photography', 'Travel Tips', 'Monsoon', 'Weather'
 ];
 
-const NewsPage: React.FC = () => {
+const NewsPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
-  const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  const [selectedTags, setSelectedTags] = useState([]);
 
   const filteredPosts = blogPosts.filter(post => {
     const matchesSearch = 
@@ -117,7 +105,7 @@ const NewsPage: React.FC = () => {
     return matchesSearch && matchesCategory && matchesTags;
   });
 
-  const toggleTag = (tag: string) => {
+  const toggleTag = (tag) => {
     if (selectedTags.includes(tag)) {
       setSelectedTags(selectedTags.filter(t => t !== tag));
     } else {

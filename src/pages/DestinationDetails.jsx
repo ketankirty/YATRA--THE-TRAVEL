@@ -6,7 +6,7 @@ import { loadStripe } from '@stripe/stripe-js';
 
 const stripePromise = loadStripe('your_publishable_key');
 
-const DestinationDetails: React.FC = () => {
+const DestinationDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [selectedDate, setSelectedDate] = useState('');

@@ -6,7 +6,7 @@ import { loadStripe } from '@stripe/stripe-js';
 
 const stripePromise = loadStripe('your_publishable_key');
 
-const BookingPage: React.FC = () => {
+const BookingPage = () => {
   const navigate = useNavigate();
   const [selectedDestination, setSelectedDestination] = useState('');
   const [startDate, setStartDate] = useState('');
@@ -17,7 +17,7 @@ const BookingPage: React.FC = () => {
 
   const selectedDestinationData = destinationData.find(d => d.id === selectedDestination);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 

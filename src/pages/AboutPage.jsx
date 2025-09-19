@@ -1,7 +1,7 @@
 import React from 'react';
 import { MapPin, Award, Users, Shield, Clock, Heart } from 'lucide-react';
 
-const AboutPage: React.FC = () => {
+const AboutPage = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
