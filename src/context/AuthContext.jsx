@@ -1,4 +1,5 @@
 import React, { createContext, useState, useContext } from 'react';
+import { authAPI, apiClient } from '../utils/api';
 
 const AuthContext = createContext(undefined);
 
@@ -11,47 +12,61 @@ export const useAuth = () => {
 };
 
 const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(() => {
+    const savedUser = localStorage.getItem('user');
+    return savedUser ? JSON.parse(savedUser) : null;
+  });
+  const [loading, setLoading] = useState(false);
 
-  // Mock authentication functions
   const login = async (email, password) => {
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 800));
-    
-    // For demo purposes
-    if (email && password) {
-      setUser({
-        id: '1',
-        name: 'Demo User',
-        email: email
-      });
-      return true;
+    setLoading(true);
+    try {
+      const response = await authAPI.login({ email, password });
+      
+      if (response.success) {
+        setUser(response.user);
+        apiClient.setToken(response.token);
+        localStorage.setItem('user', JSON.stringify(response.user));
+        return true;
+      }
+      return false;
+    } catch (error) {
+      console.error('Login error:', error);
+      throw error;
+    } finally {
+      setLoading(false);
     }
-    return false;
   };
 
   const signup = async (name, email, password) => {
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 800));
-    
-    // For demo purposes
-    if (name && email && password) {
-      setUser({
-        id: '1',
-        name: name,
-        email: email
-      });
-      return true;
+    setLoading(true);
+    try {
+      const response = await authAPI.register({ name, email, password });
+      
+      if (response.success) {
+        setUser(response.user);
+        apiClient.setToken(response.token);
+        localStorage.setItem('user', JSON.stringify(response.user));
+        return true;
+      }
+      return false;
+    } catch (error) {
+      console.error('Signup error:', error);
+      throw error;
+    } finally {
+      setLoading(false);
     }
-    return false;
   };
 
   const logout = () => {
     setUser(null);
+    apiClient.setToken(null);
+    localStorage.removeItem('user');
   };
 
   const value = {
     user,
+    loading,
     login,
     signup,
     logout,
